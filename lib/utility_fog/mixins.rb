@@ -9,7 +9,3 @@ module UtilityFog
     end
   end
 end
-
-class Class
-  include UtilityFog::TagSupport
-end
