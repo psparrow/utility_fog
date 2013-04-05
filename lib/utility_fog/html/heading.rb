@@ -1,9 +1,7 @@
 class Heading < Foglet
 
   def initialize(level = 1, content = "", attributes = {})
-    self.tag        = "h#{level}"
-    self.content    << content
-    self.attributes = attributes
+    super(tag: "h#{level}", attributes: attributes, content: content)
   end
 
 end

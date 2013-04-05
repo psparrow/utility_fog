@@ -1,8 +1,7 @@
 class Foglet
   extend UtilityFog::TagSupport
 
-  attr_reader   :closing_tag
-  attr_accessor :tag, :attributes
+  attr_accessor :tag, :closing_tag, :attributes
 
   def initialize(args = {})
     @tag         = args[:tag] unless tag
@@ -28,33 +27,42 @@ class Foglet
   end
 
   def to_s
-      html = opening_tag_html
+      html = render_opening_tag
 
       if requires_closing_tag?
-        html << content_html
-        html << closing_tag_html
+        html << render_content
+        html << render_closing_tag
       end
 
       html
   end
 
-  def opening_tag_html
+  def render_opening_tag
     html = "<#{tag}"
 
-    attributes.each do |key, value|
-      html << " #{key}=\"#{value}\""
-    end
-
+    html << render_attributes
     html << " /" unless requires_closing_tag?
     html << ">"
   end
 
-  def closing_tag_html
+  def render_attributes
+    attributes.keys.inject("") { |html, key|
+      html << " #{key}=\"#{attributes[key]}\""
+    }
+  end
+
+  def render_closing_tag
     "</#{tag}>"
   end
 
-  def content_html
-    content.join
+  def render_content
+    content.inject("") { |html, item|
+      html << render_item(item)
+    }
+  end
+
+  def render_item(item)
+    "#{item}"
   end
 
 end
