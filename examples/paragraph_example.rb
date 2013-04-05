@@ -1,7 +1,7 @@
 require_relative '../lib/utility_fog'
 
-paragraph = P.new
+p = P.new
 
-paragraph.insert("Testing")
+p.insert("Testing")
 
-print paragraph
+print p

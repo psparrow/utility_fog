@@ -5,7 +5,8 @@ foglet = Foglet.new(
   closing_tag: true,
 )
 
-foglet.set_attribute(:class, "content")
+foglet.attributes[:class] = "content"
+foglet.attributes[:id]    = "main"
 
 foglet.insert("Hello, World!")
 
